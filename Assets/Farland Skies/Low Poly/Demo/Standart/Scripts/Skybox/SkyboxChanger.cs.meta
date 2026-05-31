@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0dad2de93d90b5a43bc6c5e5b0f1a77c
+timeCreated: 1459805230
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 60004
+  packageName: Farland Skies - Cloudy Crown
+  packageVersion: 1.0
+  assetPath: Assets/Farland Skies/Low Poly/Demo/Standart/Scripts/Skybox/SkyboxChanger.cs
+  uploadId: 111526

@@ -1,9 +1,5 @@
-﻿/**
- * This is an enhanced version of the FPSWalker from UnifyWiki:
- * http://wiki.unity3d.com/index.php?title=FPSWalkerEnhanced
- */
-
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSWalkerEnhanced : MonoBehaviour
@@ -86,8 +82,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
             }
             // However, just raycasting straight down from the center can fail when on steep slopes
             // So if the above raycast didn't catch anything, raycast down from the stored ControllerColliderHit point instead
-            else
-            {
+            else {
                 Physics.Raycast(contactPoint + Vector3.up, -Vector3.up, out hit);
                 if (Vector3.Angle(hit.normal, Vector3.up) > slideLimit)
                     sliding = true;
@@ -103,7 +98,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
 
             // If running isn't on a toggle, then use the appropriate speed depending on whether the run button is down
             if (!toggleRun)
-                speed = Input.GetButton("Fire3") ? runSpeed : walkSpeed;
+                speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
 
             // If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
             if ((sliding && slideWhenOverSlopeLimit) || (slideOnTaggedObjects && hit.collider.tag == "Slide"))
@@ -115,8 +110,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
                 playerControl = false;
             }
             // Otherwise recalculate moveDirection directly from axes, adding a bit of -y to avoid bumping down inclines
-            else
-            {
+            else {
                 moveDirection = new Vector3(inputX * inputModifyFactor, -antiBumpFactor, inputY * inputModifyFactor);
                 moveDirection = myTransform.TransformDirection(moveDirection) * speed;
                 playerControl = true;
@@ -127,12 +121,11 @@ public class FPSWalkerEnhanced : MonoBehaviour
                 jumpTimer++;
             else if (jumpTimer >= antiBunnyHopFactor)
             {
-                moveDirection.y = (Input.GetButton("Fire3")) ? jumpSpeed * 5 : jumpSpeed;
+                moveDirection.y = jumpSpeed;
                 jumpTimer = 0;
             }
         }
-        else
-        {
+        else {
             // If we stepped over a cliff or something, set the height at which we started falling
             if (!falling)
             {
@@ -160,7 +153,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
     {
         // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
         // FixedUpdate is a poor place to use GetButtonDown, since it doesn't necessarily run every frame and can miss the event)
-        if (toggleRun && grounded && Input.GetButtonDown("Fire3"))
+        if (toggleRun && grounded && Input.GetButtonDown("Run"))
             speed = (speed == walkSpeed ? runSpeed : walkSpeed);
     }
 
